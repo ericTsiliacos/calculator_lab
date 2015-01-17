@@ -11,12 +11,24 @@ window.onload = function(){
 
   resetUI(calcDisplay);
 
+  var clickClearListener = function() {
+    resetUI(calcDisplay);
+  };
+
+  var clickEnterListener = function() {
+    output = processEnter(totalUserInputs, currentOperator)
+    calcDisplay.innerHTML = output
+    totalUserInputs.push(value);
+  };
+
+  var clickNumberListener = function() {
+    value = processNumber(totalUserInputs, this.innerHTML, currentOperator);
+    calcDisplay.innerHTML = value;
+    totalUserInputs.push(value);
+  };
+
   _.each(numberElements, function(numberElement) {
-    numberElement.addEventListener("click", function() {
-      value = processNumber(totalUserInputs, this.innerHTML, currentOperator);
-      calcDisplay.innerHTML = value;
-      totalUserInputs.push(value);
-    });
+    numberElement.addEventListener("click", clickNumberListener);
   });
 
   _.each(operatorElements, function(operatorElement) {
@@ -25,18 +37,12 @@ window.onload = function(){
     });
   });
 
-  clearElement.addEventListener("click", function() {
-    resetUI(calcDisplay);
-  });
+  clearElement.addEventListener("click", clickClearListener);
 
-  enterElement.addEventListener("click", function() {
-    output = processEnter(totalUserInputs, currentOperator)
-    calcDisplay.innerHTML = output
-    totalUserInputs.push(value);
-  });
+  enterElement.addEventListener("click", clickEnterListener);
 }
 
 var resetUI = function(calcDisplay) {
   calcDisplay.innerHTML = "0";
-}
+};
 
