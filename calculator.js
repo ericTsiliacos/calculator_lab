@@ -5,37 +5,38 @@ window.onload = function(){
   var totalUserInputs = [];
   var currentOperator = null;
 
+  resetUI(calcDisplay);
+
   for (var i = 0; i < buttons.length; i++) {
     var buttonText = buttons[i].innerHTML
-      // console.log(buttonText)
     if (buttonText === "CLR" ) {
       buttons[i].addEventListener("click", function() {
-        calcDisplay.innerHTML = '';
+        resetUI(calcDisplay);
       });
 
     } else if (buttonText === "ENT") {
       buttons[i].addEventListener("click", function() {
-        expression = totalUserInputs[0] + currentOperator + totalUserInputs[1]
-        console.log(expression)
-        output = eval(expression)
+        output = processEnter(totalUserInputs, currentOperator)
         calcDisplay.innerHTML = output
+        totalUserInputs.push(value);
       });
+
     } else if (buttonText === "+" || buttonText === "-" || buttonText === "*" || buttonText === "/") {
       buttons[i].addEventListener("click", function(){
         currentOperator = this.innerHTML;
       });
+
     } else {
       buttons[i].addEventListener("click", function() {
-        // value = runButton(totalUserInputs, this.innerHTML, currentOperator);
-        // calcDisplay.innerHTML = value[0];
-        // userInput.push(value[1]);
+        value = processNumber(totalUserInputs, this.innerHTML, currentOperator);
+        calcDisplay.innerHTML = value;
+        totalUserInputs.push(value);
       });
     }
-
   }
-
-
-
-
-
 }
+
+var resetUI = function(calcDisplay) {
+  calcDisplay.innerHTML = "0";
+}
+

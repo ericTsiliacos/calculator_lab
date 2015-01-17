@@ -1,12 +1,17 @@
-var runButton = function(totalUserInputs, innerHTML, currentOperator) {
-  if (totalUserInputs.length === 0) {
-    return [innerHTML, innerHTML];
+var processNumber = function(lastInputs, currentInput, currentOperator) {
+  if (lastInputs.length === 0 || currentOperator !== null) {
+    return currentInput;
   } else {
-    var valueToDisplay = totalUserInputs[0] + innerHTML;
-    return [valueToDisplay, valueToDisplay];
+    return lastInputs[lastInputs.length - 1] + currentInput;
   }
 }
 
-var hi = function() {
-  console.log("hi!");
-}
+var processEnter = function(totalUserInputs, currentOperator) {
+  if (totalUserInputs.length === 1) {
+    var currentInput = totalUserInputs[totalUserInputs.length - 1];
+    return eval(currentInput + currentOperator + currentInput);
+  } else {
+    return eval(totalUserInputs[totalUserInputs.length - 2] + currentOperator + totalUserInputs[totalUserInputs.length - 1]);
+  }
+};
+
