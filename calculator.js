@@ -9,10 +9,10 @@ window.onload = function(){
   var totalUserInputs = [];
   var currentOperator = null;
 
-  resetUI(calcDisplay);
+  calcDisplay.innerHTML = "0";
 
   var clickClearListener = function() {
-    resetUI(calcDisplay);
+    calcDisplay.innerHTML = "0";
   };
 
   var clickEnterListener = function() {
@@ -41,8 +41,4 @@ window.onload = function(){
 
   enterElement.addEventListener("click", clickEnterListener);
 }
-
-var resetUI = function(calcDisplay) {
-  calcDisplay.innerHTML = "0";
-};
 
