@@ -9,6 +9,8 @@ window.onload = function(){
   var totalUserInputs = [];
   var currentOperator = null;
 
+  var calculator = new Calculator();
+
   calcDisplay.innerHTML = "0";
 
   var clickClearListener = function() {
@@ -16,13 +18,13 @@ window.onload = function(){
   };
 
   var clickEnterListener = function() {
-    output = processEnter(totalUserInputs, currentOperator)
+    output = calculator.processEnter(totalUserInputs, currentOperator)
     calcDisplay.innerHTML = output
     totalUserInputs.push(value);
   };
 
   var clickNumberListener = function() {
-    value = processNumber(totalUserInputs, this.innerHTML, currentOperator);
+    value = calculator.processNumber(totalUserInputs, this.innerHTML, currentOperator);
     calcDisplay.innerHTML = value;
     totalUserInputs.push(value);
   };
